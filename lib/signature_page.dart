@@ -1,5 +1,12 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:signature/signature.dart';
+import 'package:signature_app_in_flutter/overlay_page.dart';
 
 class SignaturePage extends StatefulWidget {
   const SignaturePage({super.key});
@@ -16,6 +23,7 @@ class _SignaturePageState extends State<SignaturePage> {
     exportBackgroundColor: Colors.transparent,
   );
 
+  GlobalKey<SignatureState> _signatureKey = GlobalKey<SignatureState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +52,6 @@ class _SignaturePageState extends State<SignaturePage> {
                       width: size.width,
                       backgroundColor: Colors.transparent,
                     ),
-
                   ],
                 ),
               ),
@@ -55,7 +62,9 @@ class _SignaturePageState extends State<SignaturePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(onPressed: ()=> _controller.clear(), icon: const Icon(Icons.clear)),
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.done)),
+                  IconButton(onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const ImageOverlayExample()));
+                    }, icon: const Icon(Icons.done)),
                 ],
               ),
             ),
@@ -65,3 +74,5 @@ class _SignaturePageState extends State<SignaturePage> {
     );
   }
 }
+
+
